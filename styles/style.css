@@ -1468,3 +1468,8 @@ footer a {
 .description p {
   margin-bottom: 0;
 }
+
+/* Article CSS */
+.teaser-article img {
+  width: 600px;
+}

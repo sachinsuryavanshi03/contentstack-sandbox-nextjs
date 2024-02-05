@@ -41,6 +41,17 @@ export default function ArticlePost({ articlePost, pageUrl }: {articlePost: Arti
               <Skeleton />
             </h2>
           )}
+          <div className='teaser-article'>
+          {post.teaser_banner ? (
+            <img
+              alt={post.teaser_banner.filename}
+              src={post.teaser_banner.url}
+              {...post.teaser_banner.$?.url as {}}
+            />
+          ) : (
+            ''
+          )}
+            </div>
           {post && post.audience ? (
             <h3 {...post.$?.audience as {}}>{post.audience.name} : {post.audience.audience_type}</h3>
             
@@ -67,25 +78,12 @@ export default function ArticlePost({ articlePost, pageUrl }: {articlePost: Arti
             <Skeleton height={800} width={600} />
           )}
         </article>
-        <div className='blog-column-right'>
-          <div className='related-post'>
-            
-            {post && post.related_post ? (
-              <ArchiveRelative
-                {...post.$?.related_post}
-                blogs={post.related_post}
-              />
-            ) : (
-              <Skeleton width={300} height={500} />
-            )}
-          </div>
-        </div>
       </div>
     </>
   );
 }
 export async function getServerSideProps({ params }: any) {
-  
+  console.log(params.article);
   try {
     //const page = await getPageRes('/article');
     const posts = await getArticlePostRes(`/article/${params.article}`);
